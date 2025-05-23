@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Team Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#home">Home</a>
+        <a href="#add_player">Add Player</a>
+        <a href="#view_players">View Players</a>
+        <a href="#add_match">Add Match</a>
+        <a href="#view_matches">View Matches</a>
+        <a href="#schedule">Schedule</a>
+    </div>
+
+    <div class="container">
+        <section id="home">
+            <h2>Welcome to the Sports Team Manager</h2>
+            <p>Manage players, matches, and schedules with ease.</p>
+        </section>
+
+        <section id="add_player">
+            <h2>Add Player</h2>
+            <form method="post">
+                Name: <input type="text" name="name" required><br>
+                Position: <input type="text" name="position" required><br>
+                Number: <input type="number" name="number" required><br>
+                <input type="submit" name="add_player" value="Add Player">
+            </form>
+        </section>
+
+        <section id="view_players">
+    <h2>Team Players</h2>
+    <table id="players_table">
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Number</th>
+        </tr>
+        <?php
+        // Fetch and display players
+        $result = $conn->query("SELECT * FROM players");
+        while($row = $result->fetch_assoc()) {
+            echo "<tr><td>{$row['name']}</td><td>{$row['position']}</td><td>{$row['number']}</td></tr>";
+        }
+        ?>
+    </table>
+</section>
+
+
+        <section id="add_match">
+            <h2>Add Match Result</h2>
+            <form method="post" action="forms.php">
+                Opponent: <input type="text" name="opponent" required><br>
+                Date: <input type="date" name="match_date" required><br>
+                Score: <input type="text" name="score" required><br>
+                <input type="submit" name="add_match" value="Add Match">
+            </form>
+        </section>
+
+        <section id="view_matches">
+            <h2>Match Results</h2>
+            <table id="matches_table">
+                <tr>
+                    <th>Opponent</th>
+                    <th>Date</th>
+                    <th>Score</th>
+                </tr>
+                <!-- Match data will be populated here by PHP -->
+            </table>
+        </section>
+
+        <section id="schedule">
+            <h2>Weekly Training Schedule</h2>
+            <ul>
+                <li>Monday - 5:00 PM</li>
+                <li>Wednesday - 5:00 PM</li>
+                <li>Friday - 6:00 PM</li>
+            </ul>
+        </section>
+    </div>
+</body>
+</html>
